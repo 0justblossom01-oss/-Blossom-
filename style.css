@@ -1,0 +1,486 @@
+:root{
+  --bg: #000;
+  --purple: #8c2bff;
+  --light: #e9d5ff;
+  --glass: rgba(140,43,255,0.12);
+  --neon-purple: #c084fc; 
+  --neon-white: #fff;
+  --neon-border: 4px solid var(--neon-purple); 
+}
+
+/* ---------------------------------------------------- */
+/* 1. ESTILOS BASE Y LANDING PAGE */
+/* ---------------------------------------------------- */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--neon-white);
+  overflow-x: hidden;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+}
+
+#landing-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  /* APLICADO: Fondo de ladrillo también en la landing page */
+  background: 
+    radial-gradient(circle at center, rgba(140, 43, 255, 0.05) 0%, rgba(0, 0, 0, 0.5) 60%),
+    url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp3YpUMAAAAFVBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAC8dD9qAAAAB3RSTlMAAAAAX7L5ec7gqJ0AAAApSURBVDjLY2AYBUgAog0gRgF8kIIBsP8RGI2L7/8DDBYgAwg2gABhYn/M2f8xAAAAAElFTkSuQmCC') repeat;
+  background-blend-mode: overlay;
+}
+
+/* El glitch-background ya no es necesario para el fondo base, ahora #landing-page lo maneja */
+.glitch-background {
+  display: none; 
+}
+
+.logo-neon {
+  font-family: 'Moirai One', cursive; 
+  font-size: 8vw; 
+  margin: 0;
+  text-shadow: 
+    0 0 7px var(--neon-white),
+    0 0 10px var(--neon-white),
+    0 0 21px var(--neon-purple), 
+    0 0 42px var(--neon-purple),
+    0 0 82px var(--neon-purple),
+    0 0 92px var(--neon-purple);
+  animation: flicker 1.5s infinite alternate; 
+  padding: 0 20px;
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+      0 0 4px var(--neon-white),
+      0 0 11px var(--neon-white),
+      0 0 19px var(--neon-white),
+      0 0 40px var(--neon-purple),
+      0 0 80px var(--neon-purple),
+      0 0 90px var(--neon-purple),
+      0 0 100px var(--neon-purple);
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    opacity: 0.8;
+  }
+}
+
+/* SLOGAN GLITCH CLÁSICO */
+.slogan-text {
+  font-family: 'Rock Salt', cursive;
+  font-size: 2.5vw;
+  color: var(--light);
+  margin-top: 15px;
+  position: relative; 
+}
+
+.slogan-text::before,
+.slogan-text::after {
+  content: attr(data-text); 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent; 
+}
+
+.slogan-text::before {
+  left: 2px;
+  text-shadow: -1px 0 var(--neon-purple);
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+  clip-path: inset(0 0 100% 0); 
+}
+
+.slogan-text::after {
+  left: -2px;
+  text-shadow: 1px 0 var(--neon-white);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+  clip-path: inset(0 0 100% 0);
+}
+
+@keyframes glitch-anim-1 {
+  0%, 10% { clip-path: inset(20% 0 70% 0); opacity: 0.8; }
+  15%, 25% { clip-path: inset(40% 0 50% 0); opacity: 0.9; }
+  30%, 40% { clip-path: inset(60% 0 30% 0); opacity: 0.7; }
+  45%, 55% { clip-path: inset(80% 0 10% 0); opacity: 0.6; }
+  60%, 70% { clip-path: inset(10% 0 80% 0); opacity: 0.85; }
+  75%, 85% { clip-path: inset(30% 0 60% 0); opacity: 0.95; }
+  90%, 100% { clip-path: inset(5% 0 90% 0); opacity: 1; }
+}
+@keyframes glitch-anim-2 {
+  0%, 10% { clip-path: inset(30% 0 60% 0); opacity: 0.9; }
+  15%, 25% { clip-path: inset(50% 0 40% 0); opacity: 0.7; }
+  30%, 40% { clip-path: inset(70% 0 20% 0); opacity: 0.8; }
+  45%, 55% { clip-path: inset(90% 0 5% 0); opacity: 0.95; }
+  60%, 70% { clip-path: inset(20% 0 70% 0); opacity: 0.8; }
+  75%, 85% { clip-path: inset(40% 0 50% 0); opacity: 0.9; }
+  90%, 100% { clip-path: inset(10% 0 85% 0); opacity: 0.75; }
+}
+
+
+/* ---------------------------------------------------- */
+/* 2. MENÚ LATERAL TIPO VIDEOJUEGO */
+/* ---------------------------------------------------- */
+#main-menu {
+  position: fixed;
+  right: 30px; 
+  top: 50%; 
+  transform: translateY(-50%);
+  width: 250px;
+  z-index: 100; 
+}
+
+.menu-logo-link {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.menu-logo-title {
+    font-size: 2.5em; 
+    padding: 0;
+    margin: 0;
+    color: var(--neon-purple); 
+    text-shadow: 
+      0 0 5px var(--neon-purple),
+      0 0 10px var(--neon-purple); 
+    animation: none;
+    cursor: pointer;
+}
+
+
+.menu-glitch-border {
+  padding: 15px;
+  border: var(--neon-border);
+  box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--purple);
+  background: rgba(0, 0, 0, 0.7); 
+  position: relative;
+  animation: glitch-border 10s infinite alternate; 
+}
+
+@keyframes glitch-border {
+  0%, 100% { clip-path: inset(0 0 0 0); }
+  10% { clip-path: inset(1px 0 1px 0); }
+  30% { clip-path: inset(0 1px 0 1px); }
+  50% { clip-path: inset(1px 1px 0 0); }
+  70% { clip-path: inset(0 0 1px 1px); }
+  90% { clip-path: inset(1px 0 0 1px); }
+}
+
+.menu-glitch-border a {
+  display: block;
+  font-family: 'Rock Salt', cursive;
+  color: var(--neon-white);
+  text-decoration: none;
+  padding: 12px 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(140, 43, 255, 0.3);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.menu-glitch-border a:last-child {
+  border-bottom: none;
+}
+
+.menu-glitch-border a:hover {
+  color: var(--neon-purple);
+  transform: translateX(5px);
+  text-shadow: 0 0 5px var(--neon-purple);
+}
+
+/* ---------------------------------------------------- */
+/* 3. CONTENIDO PRINCIPAL Y SECCIONES */
+/* ---------------------------------------------------- */
+#content-display {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 300px; 
+  bottom: 0;
+  padding: 60px 40px;
+  overflow: hidden; 
+  display: none; 
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  /* APLICADO: Fondo de ladrillo también en el content-display */
+  background: 
+    radial-gradient(circle at center, rgba(140, 43, 255, 0.05) 0%, rgba(0, 0, 0, 0.5) 60%),
+    url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp3YpUMAAAAFVBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAC8dD9qAAAAB3RSTlMAAAAAX7L5ec7gqJ0AAAApSURBVDjLY2AYBUgAog0gRgF8kIIBsP8RGI2L7/8DDBYgAwg2gABhYn/M2f8xAAAAAElFTkSuQmCC') repeat;
+  background-blend-mode: overlay;
+}
+
+/* OVERLAY PARA EL EFECTO SLIDE MORADO A NEGRO */
+#content-display-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, var(--neon-purple), var(--bg)); 
+    z-index: 51; 
+    transform: translateX(100%); 
+    transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.section-container {
+  display: none; 
+  height: 100%;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+  /* El fondo de ladrillo ahora se aplica al padre #content-display */
+}
+
+/* --- SOBRE MÍ (IMAGEN GRANDE Y CENTRADA) --- */
+#about-me {
+  display: grid;
+  grid-template-columns: 400px 1fr; 
+  gap: 40px;
+  padding-bottom: 50px;
+  justify-items: center; 
+  align-items: center; 
+  height: 100%; 
+}
+
+#about-me .profile-image {
+  width: 350px; 
+  height: 350px; 
+  display: block; 
+  margin: 0 auto; 
+  border: var(--neon-border); 
+  box-shadow: 0 0 15px var(--neon-purple);
+  object-fit: cover; 
+  object-position: center; 
+}
+
+#about-me > div:nth-of-type(2) {
+    max-width: 600px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;     
+    text-align: center;      
+    height: 100%;
+}
+
+#about-me h2 {
+  font-family: 'Moirai One', cursive;
+  color: var(--neon-purple);
+  font-size: 3em;
+  margin-top: 0;
+}
+
+#about-me p {
+  font-family: 'Kalam', cursive; 
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+/* --- CONTACTO (SIN LOGOS DE APPS) --- */
+#contact { padding-top: 50px; }
+.contact-item {
+  margin-bottom: 30px;
+  padding: 15px;
+  border-left: 5px solid var(--neon-purple);
+  background: var(--glass);
+}
+
+.contact-item h3 {
+  font-family: 'Moirai One', cursive;
+  color: var(--light);
+  margin-top: 0;
+  margin-bottom: 5px;
+  display: flex; 
+  align-items: center;
+  gap: 15px; 
+}
+
+/* ELIMINADO: Se ha quitado el h3::before que generaba los iconos */
+/* .contact-item h3::before { ... } */
+
+.contact-item p {
+  font-family: 'Kalam', cursive;
+  margin: 0;
+  font-size: 1em;
+}
+
+/* ---------------------------------------------------- */
+/* 4. GALERÍA Y VISOR (Zoom) - MARCOS Y NOMBRES ADAPTABLES */
+/* ---------------------------------------------------- */
+#gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--neon-purple);
+}
+
+.filter-btn {
+  font-family: 'Moirai One', cursive; 
+  background: transparent;
+  border: 2px solid var(--neon-purple);
+  color: var(--neon-white);
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 5px var(--neon-purple);
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: var(--neon-purple);
+  color: var(--bg);
+  box-shadow: 0 0 15px var(--neon-purple);
+}
+
+#gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  grid-auto-rows: minmax(min-content, max-content); 
+  align-items: start; 
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  height: auto; 
+}
+
+.gallery-item:hover {
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 10px var(--neon-purple);
+}
+
+.preview-image {
+  width: 100%;
+  height: auto; 
+  display: block;
+  filter: brightness(0.6);
+  transition: filter 0.3s ease;
+}
+
+.gallery-item:hover .preview-image {
+  filter: brightness(0.8);
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--neon-white);
+  padding: 10px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .overlay {
+  transform: translateY(0);
+}
+
+.overlay h3 {
+  font-family: 'Moirai One', cursive;
+  margin: 0;
+  font-size: 1.2em;
+  color: var(--neon-purple);
+}
+
+.overlay p {
+  font-family: 'Rock Salt', cursive;
+  margin: 5px 0 0;
+  font-size: 0.8em;
+}
+
+/* Visor de Zoom (Lightbox) */
+.viewer {
+  display: none; 
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.95);
+}
+
+.viewer.open { display: block; }
+
+.viewer-content {
+  margin: 15px auto;
+  padding: 0;
+  width: 90%;
+  height: calc(100% - 30px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 210;
+}
+
+.image-wrapper {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  cursor: grab; 
+}
+
+#full-image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  transform-origin: 0 0; 
+  transition: transform 0.1s ease-out;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--neon-white);
+  font-size: 3em;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 205;
+}
+
+.nav-arrow.left { left: 10px; }
+.nav-arrow.right { right: 10px; }

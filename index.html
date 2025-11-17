@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>★Blossom★ – Portafolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Moirai+One&family=Rock+Salt&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="glitch-background" aria-hidden="true"></div>
+
+<div id="landing-page">
+    <h1 class="logo-neon">★Blossom★</h1>
+    <p class="slogan-text" data-text="Take creation, make it sensation">Take creation, make it sensation</p>
+</div>
+
+<div id="main-menu">
+    <a href="#" class="menu-logo-link" onclick="showLandingPage(); return false;">
+        <h2 class="menu-logo-title logo-neon">★Blossom★</h2>
+    </a>
+    
+    <div class="menu-glitch-border">
+        <a onclick="showSection('about-me');">Sobre mí</a>
+        <a onclick="showSection('gallery');">La galería</a>
+        <a onclick="showSection('contact');">Mi contacto</a>
+    </div>
+</div>
+
+<div id="content-display">
+    
+    <div id="content-display-overlay"></div>
+    
+    <div id="about-me" class="section-container">
+        <img src="assets/content.png" alt="Sara Niño" class="profile-image"/> 
+        
+        <div>
+            <h2>Sobre mí</h2>
+            <p>Me presento, mi nombre es Sara Niño, actualmente tengo 18 años. Me apasiona el diseño gráfico, pues ayuda a comunicar y aportar nuevas ideas al tan amplio mundo creativo. Mis trabajos manejan una vibra alternativa mezclada con fantasía, combinando estilos como lo son el brutalismo y el pop art. Mi objetivo siempre será hacer diseños impecables, capturando la esencia de lo que se quiere mostrar.</p>
+        </div>
+    </div>
+    
+    <div id="gallery" class="section-container">
+        <div id="gallery-filters">
+        </div> 
+        <div id="gallery-grid">
+        </div>
+        
+        <div class="viewer" id="viewer">
+            <div class="viewer-content">
+                <span class="close-btn" onclick="closeViewer()">&times;</span>
+                <button class="nav-arrow left" onclick="navigateGallery(-1)">&#10094;</button>
+                <button class="nav-arrow right" onclick="navigateGallery(1)">&#10095;</button>
+                
+                <div class="image-wrapper" id="imgwrap">
+                    <img id="full-image" src="" alt="Trabajo completo" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="contact" class="section-container">
+        <div class="contact-item">
+            <h3>Instagram</h3>
+            <p>@0blossom_1</p>
+        </div>
+        <div class="contact-item">
+            <h3>WhatsApp</h3>
+            <p>+57 3332806264</p>
+        </div>
+        <div class="contact-item">
+            <h3>E-mail</h3>
+            <p>0just.blossom01@gmail.com</p>
+        </div>
+    </div>
+    
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
